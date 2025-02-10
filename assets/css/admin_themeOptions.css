@@ -1,0 +1,284 @@
+body{
+    --abstandUntenContainer: 120px;
+    --abstandUntenTxtElement: var(--abstandUntenParagraph);
+    --wp--style--global--content-size: 850px;
+}
+
+.multisite #wpwrap{
+	background: #fff;
+	}
+	.nav-tab{
+		border: 1px solid #deded0;
+	}
+	/*Option-Tabs*/
+	.multisite .nav-tab{
+		background: #dcdcdeb0;
+        border-radius: 5px 5px 0 0;
+	}
+	.multisite .nav-tab:not(.nav-tab-active){
+		box-shadow: inset 0 -8px 10px -8px #80808073;
+	}
+	
+	.multisite .nav-tab-active, 
+	.multisite .nav-tab-active:focus, 
+	.multisite .nav-tab-active:focus:active, 
+	.multisite .nav-tab-active:hover{
+		background: #fff;
+		border-bottom:2px solid #fff;
+	}
+	.multisite .nav-tab-wrapper, 
+	.multisite .wrap h2.nav-tab-wrapper, 
+	.multisite h1.nav-tab-wrapper{
+		border-bottom: 1px solid #dedede;
+	}
+	
+	.multisite .wrap input[type="color"]{
+		height: 40px;
+	    width: 80px;
+	    padding: 0;
+		border: 0;		
+	}
+
+/*Mainpage*/
+.main-page-list li ul{
+	padding:10px 20px
+}
+
+/*Typografie*/
+.ci-fonts-selector-wrap{
+    max-width: 175px;
+    position: relative;
+    }
+    .ci-fonts-selector-wrap::after{
+        content:"\2023";
+        position: absolute;
+        top: 6px;
+        transform: rotate(90deg) scale(1.5, 3);
+        right: 8px;
+    }
+
+    .ci-fonts-selector-wrap input{
+        background: #fff;
+        cursor: pointer;
+        text-transform: capitalize;
+    }
+
+    .ci-fonts-selector-wrap > div{
+        display:none;
+        }
+        .ci-fonts-selector-wrap > div p{
+            padding-left:10px;
+            cursor: pointer;
+            text-transform: capitalize;
+        }
+        .ci-fonts-selector-wrap > div p:hover{
+            background: #fff;
+        }
+
+        .ci-fonts-selector-wrap input{
+            min-width: 175px;
+        }
+
+        .ci-fonts-selector-wrap input[value=Montserrat],
+        .ci-fonts-selects p.Montserrat{
+            font-family: "Montserrat";
+        }
+        .ci-fonts-selector-wrap input[value=Cabin],
+        .ci-fonts-selects p.Cabin{
+            font-family: "Cabin";
+        }
+        .ci-fonts-selector-wrap input[value=Roboto],
+        .ci-fonts-selects p.Roboto{
+            font-family: "Roboto";
+        }
+        .ci-fonts-selector-wrap input[value=Raleway],
+        .ci-fonts-selects p.Raleway{
+            font-family: "Raleway";
+        }
+        .ci-fonts-selector-wrap input[value=PTSans],
+        .ci-fonts-selects p.PTSans{
+            font-family: "PTSans";
+        }
+        .ci-fonts-selector-wrap input[value=Quicksand],
+        .ci-fonts-selects p.Quicksand{
+            font-family: "Quicksand";
+        }
+        .ci-fonts-selector-wrap input[value=NotoSans],
+        .ci-fonts-selects p.NotoSans{
+            font-family: "NotoSans";
+        }
+        .ci-fonts-selector-wrap input[value=Garamond],
+        .ci-fonts-selects p.Garamond{
+            font-family: "Garamond";
+        }
+        .ci-fonts-selector-wrap input[value=Merriweather],
+        .ci-fonts-selects p.Merriweather{
+            font-family: "Merriweather";
+        }
+        .ci-fonts-selector-wrap input[value=DancingScript],
+        .ci-fonts-selects p.DancingScript{
+            font-family: "DancingScript";
+        }
+    .mb_theme_ci_fonts_ label[for=mb_theme_ci_fonts_lineheight]{
+        font-weight: 400;
+    }
+
+
+
+.edit-post-visual-editor h1,
+.edit-post-visual-editor h2,
+.edit-post-visual-editor h3,
+.edit-post-visual-editor h4,
+.edit-post-visual-editor h5,
+.edit-post-visual-editor h6{
+    font-family: var(--ueberschrift);
+}
+
+.webinar-promo-notification,
+.wp-admin .column-comments{
+    display: none;
+}
+
+.fixed .column-author{
+    width: 15%;
+}
+
+.components-panel__body-title,
+.ui-sortable-handle,
+.edit-post-sidebar__panel h1,
+.edit-post-sidebar__panel h2,
+.edit-post-sidebar__panel h3,
+.edit-post-sidebar__panel h4,
+.edit-post-sidebar__panel .components-button{
+    font-family: "Arial";
+    font-weight: 400 !important;
+}
+
+/*Teaserbox*/
+.mbgi-block-teaserbox{
+	--TeaserboxBG:var(--sekundaerfarbe);
+    --TeaserboxColor:var(--menufarbe);
+    }
+    .mbgi-block-teaserbox .teaserbox-text:before{
+        width: 192px;
+        height: 192px;    
+        right:-5%;
+        top:60%;
+    }
+    
+/*CI Farben*/
+.theme-options_page_theme-options-layout label,
+.theme-options_page_theme-options-ci label{
+	display: flex;
+    flex-direction: column;
+	}
+    .toptions-logo-favicon label[for=upload_favicon192],
+    .toptions-logo-favicon label[for=upload_favicon180],
+    .toptions-logo-favicon label[for=upload_favicon128],
+    .toptions-logo-favicon label[for=upload_favicon32],
+    .toptions-logo-favicon label[for=upload_image]{
+        flex-direction: row;
+    }
+	.theme-options_page_theme-options-layout label span,
+	.theme-options_page_theme-options-ci label span{
+		font-weight: 100;
+		font-size: 88%
+	}
+	
+	.theme-options_page_theme-options-ci img{
+		background: #d6d3d329;
+	    padding: 2px !important;
+	    margin-bottom: 10px;
+		}
+
+#auto-color-wrap{
+	display: flex;
+	align-items: center;
+	}
+	#auto-color-wrap>div{
+		display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+        padding-left: 20px;
+		gap: 5px;
+		}
+		#auto-color-wrap div span{
+		    display: inline-flex;
+		    align-items: center;
+		    position: relative;
+		    gap: 5px;
+		}
+		#auto-color-wrap div span:hover{
+		    color:rgb(63, 126, 4);
+		    cursor: pointer;
+		}
+    
+    
+/*Benutzerdef. Styles*/
+#mb_theme_layout_customstyle_customcss_id{
+	font-family: 'Montserrat';
+    line-height: 170%;
+    letter-spacing: 1.5px;
+}
+
+/*Theme Options*/
+.theme-options_page_theme-options-ci .form-table tr{
+	border-bottom: 1px solid #d7d7d7;	
+	}
+	.theme-options_page_theme-options-ci .form-table tr td{
+		display: flex;
+	    flex-direction: column;
+		}
+		.theme-options_page_theme-options-ci .form-table tr td select{
+			max-width: 175px
+		}
+		.theme-options_page_theme-options-ci .form-table tr td input[type=number]{
+			max-width: 100px
+		}
+		
+        .form-table label span{
+            display: block;
+            font-size: 12px;
+            font-weight: 300;
+        }
+        
+        .form-table img{
+	        background: #eeeeee87;
+		    display: block;
+		    float: unset !important;
+		    padding: 10px !important;
+			border-radius: 5px;
+		    margin-bottom: 10px;
+        }
+
+/*Input*/
+input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select, textarea{
+	border: 1px solid #d9d9d9;
+}
+.wp-core-ui .button, .wp-core-ui .button-secondary{
+	border-color: #b2c5d4;
+}
+
+/*Design / Widgets*/
+#widgets-editor .edit-widgets-main-block-list.block-editor-block-list__layout > div:not(:first-child){
+    display:none;
+}
+
+/*Benutzer webmaster_sportive entfernen verhindern*/
+#nf-top-notice,
+.table-view-list.users #user-1 .column-username{}
+.table-view-list.users #user-1 .column-username .row-actions{
+	display:none !important
+}
+
+/*Option hide and Show*/
+#zusatzanzeige .showmore{
+    cursor: pointer;
+    border: 1px solid #c3c3c3;
+    background-color: #d1e5d6;
+    border-radius: 3px;
+    padding:3px 8px;
+}
+table tr.hideRow{
+    display:none;
+}

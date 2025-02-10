@@ -1,0 +1,461 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/theme.json",
+    "version": 2,
+
+    "settings": {
+		"appearanceTools": true,
+		"layout": {
+			"contentSize": "850px",
+			"wideSize": "1200px"
+		},
+		"spacing": {
+			"spacingScale": {
+				"steps": 0
+			},
+			"spacingSizes": [
+				{
+					"size": "clamp(1.5rem, 5vw, 2rem)",
+					"slug": "30",
+					"name": "1"
+				},
+				{
+					"size": "clamp(1.8rem, 1.8rem + ((1vw - 0.48rem) * 2.885), 3rem)",
+					"slug": "40",
+					"name": "2"
+				},
+				{
+					"size": "clamp(2.5rem, 8vw, 4.5rem)",
+					"slug": "50",
+					"name": "3"
+				},
+				{
+					"size": "clamp(3.75rem, 10vw, 7rem)",
+					"slug": "60",
+					"name": "4"
+				},
+				{
+					"size": "clamp(5rem, 5.25rem + ((1vw - 0.48rem) * 9.096), 8rem)",
+					"slug": "70",
+					"name": "5"
+				},
+				{
+					"size": "clamp(7rem, 14vw, 11rem)",
+					"slug": "80",
+					"name": "6"
+				}
+			],
+			"units": [
+				"%",
+				"px",
+				"em",
+				"rem",
+				"vh",
+				"vw"
+			]
+		},
+		"typography": {
+			"dropCap": false,
+			"fluid": true,
+			"fontFamilies": [
+				{
+					"fontFace": [
+						{
+							"fontFamily": "Arvo",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "400",
+							"src": [
+								"file:./fonts/Arvo/arvo-v14-latin-regular.woff2"
+							]
+						},
+						{
+							"fontFamily": "Arvo",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "700",
+							"src": [
+								"file:./fonts/Arvo/arvo-v14-latin-700.woff2"
+							]
+						},
+						{
+							"fontFamily": "Arvo",
+							"fontStretch": "normal",
+							"fontStyle": "italic",
+							"fontWeight": "400",
+							"src": [
+								"file:./fonts/Arvo/arvo-v14-latin-italic.woff2"
+							]
+						}
+					],
+					"fontFamily": "\"Arvo\", sans",
+					"name": "Arvo",
+					"slug": "arvo"
+				},
+				{
+					"fontFace": [
+						{
+							"fontFamily": "Cabin",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "400",
+							"src": [
+								"file:./fonts/Cabin/cabin-v26-latin-regular.woff2"
+							]
+						},
+						{
+							"fontFamily": "Cabin",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "700",
+							"src": [
+								"file:./fonts/Cabin/cabin-v26-latin-700.woff2"
+							]
+						}
+					],
+					"fontFamily": "\"Cabin\", sans-serif",
+					"name": "Cabin",
+					"slug": "cabin"
+				},
+				{
+					"fontFace": [
+						{
+							"fontFamily": "DancingScript",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "400",
+							"src": [
+								"file:./fonts/DancingScript-Regular.ttf"
+							]
+						}
+					],
+					"fontFamily": "\"DancingScript\", serif",
+					"name": "DancingScript",
+					"slug": "dancingscript"
+				},
+				{
+					"fontFace": [
+						{
+							"fontFamily": "Exo",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "400",
+							"src": [
+								"file:./fonts/Exo/Exo-Regular.ttf"
+							]
+						},
+						{
+							"fontFamily": "Exo",
+							"fontStretch": "normal",
+							"fontStyle": "italic",
+							"fontWeight": "400",
+							"src": [
+								"file:./fonts/Exo/Exo-Italic.ttf"
+							]
+						},
+						{
+							"fontFamily": "Exo",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "700",
+							"src": [
+								"file:./fonts/Exo/Exo-SemiBold.ttf"
+							]
+						}
+					],
+					"fontFamily": "\"Exo\", sans-serif",
+					"name": "Exo",
+					"slug": "exo"
+				},
+				{
+					"fontFace": [
+						{
+							"fontFamily": "Garamond",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "400",
+							"src": [
+								"file:./fonts/Garamond/CormorantGaramond-Regular.ttf"
+							]
+						},
+						{
+							"fontFamily": "Garamond",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "700",
+							"src": [
+								"file:./fonts/Garamond/CormorantGaramond-Bold.ttf"
+							]
+						}
+					],
+					"fontFamily": "\"Garamond\", sans-serif",
+					"name": "Garamond",
+					"slug": "garamond"
+				},
+				
+				{
+					"fontFace": [
+						{
+							"fontDisplay": "block",
+							"fontFamily": "BereitBold-Oblique",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "400",
+							"src": [
+								"file:./fonts/Bereit/BereitBold-Oblique.woff2"
+							]
+						}
+					],
+					"fontFamily": "'Bereit', sans-serif",
+					"name": "Bereit",
+					"slug": "bereit"
+				},
+				{
+					"fontFace": [
+						{
+							"fontFamily": "Montserrat",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "400",
+							"src": [
+								"file:./fonts/Montserrat/montserrat-v25-latin-regular.woff2"
+							]
+						},
+						{
+							"fontFamily": "Montserrat",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "700",
+							"src": [
+								"file:./fonts/Montserrat/montserrat-v25-latin-700.woff2"
+							]
+						}
+					],
+					"fontFamily": "\"Montserrat\", sans",
+					"name": "Montserrat",
+					"slug": "montserrat"
+				},
+				{
+					"fontFace": [
+						{
+							"fontFamily": "NotoSans",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "400",
+							"src": [
+								"file:./fonts/NotoSans/NotoSans-Regular.ttf"
+							]
+						},
+						{
+							"fontFamily": "NotoSans",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "700",
+							"src": [
+								"file:./fonts/NotoSans/NotoSans-Bold.ttf"
+							]
+						}
+					],
+					"fontFamily": "\"NotoSans\", sans",
+					"name": "NotoSans",
+					"slug": "notosans"
+				},
+				{
+					"fontFace": [
+						{
+							"fontFamily": "PT Sans",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "400",
+							"src": [
+								"file:./fonts/PTSans/pt-sans-v12-latin-regular.woff2"
+							]
+						},
+						{
+							"fontFamily": "PT Sans",
+							"fontStretch": "normal",
+							"fontStyle": "italic",
+							"fontWeight": "400",
+							"src": [
+								"file:./fonts/PTSans/pt-sans-v12-latin-italic.woff2"
+							]
+						},
+						{
+							"fontFamily": "PT Sans",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "700",
+							"src": [
+								"file:./fonts/PTSans/pt-sans-v12-latin-700.woff2"
+							]
+						}
+					],
+					"fontFamily": "\"PT Sans\", sans-serif",
+					"name": "PT Sans",
+					"slug": "pt-sans"
+				},
+				{
+					"fontFace": [
+						{
+							"fontFamily": "Quicksand",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "400",
+							"src": [
+								"file:./assets/fonts/Quicksand/Quicksand-Medium.ttf"
+							]
+						},
+						{
+							"fontFamily": "Quicksand",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "700",
+							"src": [
+								"file:./assets/fonts/Quicksand/Quicksand-Bold.ttf"
+							]
+						},
+						{
+							"fontFamily": "Quicksand",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "100",
+							"src": [
+								"file:./assets/fonts/Quicksand/Quicksand-Light.ttf"
+							]
+						}
+					],
+					"fontFamily": "\"Quicksand\", sans-serif",
+					"name": "Quicksand",
+					"slug": "quicksand"
+				},				
+				{
+					"fontFace": [
+						{
+							"fontFamily": "QwitcherGrypen",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "400",
+							"src": [
+								"file:./assets/fonts/QwitcherGrypen/QwitcherGrypen-Regular.ttf"
+							]
+						},
+						{
+							"fontFamily": "QwitcherGrypen",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "700",
+							"src": [
+								"file:./assets/fonts/QwitcherGrypen/QwitcherGrypen-Bold.ttf"
+							]
+						}
+					],
+					"fontFamily": "\"QwitcherGrypen\", serif",
+					"name": "QwitcherGrypen",
+					"slug": "qwitcher-grypen"
+				},
+				{
+					"fontFace": [
+						{
+							"fontFamily": "Raleway",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "400",
+							"src": [
+								"file:./fonts/Raleway/raleway-v28-latin-regular.woff2"
+							]
+						},
+						{
+							"fontFamily": "Raleway",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "700",
+							"src": [
+								"file:./fonts/Raleway/raleway-v28-latin-700.woff2"
+							]
+						}
+					],
+					"fontFamily": "\"Raleway\", sans-serif",
+					"name": "Raleway",
+					"slug": "raleway"
+				},
+				{
+					"fontFace": [
+						{
+							"fontFamily": "Roboto",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "400",
+							"src": [
+								"file:./fonts/Roboto/roboto-v30-latin-regular.woff2"
+							]
+						},
+						{
+							"fontFamily": "Roboto",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "700",
+							"src": [
+								"file:./fonts/Roboto/roboto-v30-latin-700.woff2"
+							]
+						}
+					],
+					"fontFamily": "\"Roboto\", sans-serif",
+					"name": "Roboto",
+					"slug": "roboto"
+				},
+
+				{
+					"fontFamily": "-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Oxygen-Sans,Ubuntu,Cantarell,\"Helvetica Neue\",sans-serif",
+					"name": "System Font",
+					"slug": "system-font"
+				}
+			],
+			"fontSizes": [
+				{
+					"fluid": {
+						"min": "0.575rem",
+						"max": "11px"
+					},
+					"size": "11px",
+					"slug": "small"
+				},
+				{
+					"fluid": {
+						"min": "1rem",
+						"max": "1.125rem"
+					},
+					"size": "1.125rem",
+					"slug": "medium"
+				},
+				{
+					"fluid": {
+						"min": "1.5rem",
+						"max": "2rem"
+					},
+					"size": "2rem",
+					"slug": "large"
+				},
+				{
+					"fluid": {
+						"min": "2.5rem",
+						"max": "3rem"
+					},
+					"size": "3rem",
+					"slug": "x-large"
+				},
+				{
+					"fluid": {
+						"min": "4rem",
+						"max": "4.5rem"
+					},
+					"size": "4.5rem",
+					"slug": "xx-large"
+				}
+			]
+		},
+		"useRootPaddingAwareAlignments": true
+	},
+	
+	"patterns" : [
+        "fse-modulbuero/hero"
+    ]
+}

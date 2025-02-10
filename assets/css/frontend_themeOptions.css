@@ -1,0 +1,323 @@
+:root{
+    --abstandUntenContainer: 120px;
+    --abstandUntenTxtElement: var(--abstandUntenParagraph);
+    --abstandSeitenLoop: 20px;
+    --textMaxWidth:950px;
+}
+body{
+	--wp--style--global--content-size: var(--textMaxWidth);
+	--wp--style--global--wide-size:var(--containerMaxWidth);
+}
+/*
+    Header / Menü
+*/
+
+    /*Ausrichtung*/
+    header .header-sidebar-wrap.hamburger-off.fml #header-logo{
+        order: 1;
+        padding-right: 0;
+        padding-left: 10px;
+        }
+    .header-sidebar-wrap.hamburger-off.lfm{
+        justify-content: space-between;
+    }
+    .header-sidebar-wrap.hamburger-off.fml,
+    .header-sidebar-wrap.hamburger-off.flm{
+        justify-content: flex-end;
+    }
+    .header-sidebar-wrap .hamburger-menu{
+        order: 1;
+    }
+
+    /*SoMe*/
+    header .header-container{
+        background-color: var(--sekundaerfarbe);
+        }
+        header .header-container .social-media{
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            }
+            header .header-container a i.bi:before,
+            header .header-container a{
+                color:var(--menufarbe);
+                font-size: 12px;
+                display: flex;
+                }
+                /*Icons*/
+                .header-wrap .social-media a:before {
+                    font-family: var(--fontBootstrap);
+                    margin-right: 10px;
+                    }
+                .header-wrap .social-media a.facebook:before {
+                    content: "\F344";
+                    }
+                .header-wrap .social-media a.twitter:before {
+                    content: "\F5EF";
+                    }
+                .header-wrap .social-media a.instagram:before {
+                    content: "\F437";
+                    }
+                .header-wrap .social-media a.youtube:before {
+                    content: "\F62B";
+                    }
+                .header-wrap .social-media a.feed:before {
+                    content: "\F522";
+                    }
+                .header-wrap .social-media a.linkedin:before {
+                    content: "\F472";
+                    }
+                .header-wrap .social-media a.mastodon:before {
+                    content: "\F647";
+                    }
+                .header-wrap .social-media a.abgeordnetenwatch:before {
+                    content: "";
+                    background-image: url("/wp-content/themes/gruenesinternet-parent/images/abgeordnetenwatch.png");
+                    width: 13px;
+                    height: 13px;
+                    background-repeat: no-repeat;
+                    display: inline-block;
+                    background-size: contain;
+                    top: 2px;
+                    position: relative;
+                    }
+                .header-wrap .social-media a.email:before {
+                    content: "\F32F";
+                    margin-right:0;
+                    }
+    /*Logo*/
+    header #header-logo{
+        z-index: 1;
+        max-height: 60px;
+        padding-right: 10px;
+        }
+        header #header-logo a{
+            display: flex;
+            align-items: center;
+            color:var(--menufarbe);
+            font-weight: 600;
+            gap:10px;
+            }
+            header #header-logo img{
+                max-height: 60px;
+                padding: 10px 0;
+                }
+    
+    /*Menu*/
+    header .widget_nav_menu .sub-menu li:hover a{
+        filter: brightness(90%) contrast(1.2);
+    }
+
+
+    /*Transparent Header*/
+    body.mb-transp-header #mb-container > main{
+        padding-top: 0 !important;
+    }
+
+	body.mb-transp-header header{
+		transition: all 0.5s ease;
+		backdrop-filter: blur(2px);
+	}
+
+    body.mb-transp-header header:not(.set-bgcolor){
+        box-shadow: inset 0px 65px 30px -30px #9797973b;
+        background: transparent;
+        }
+        body.mb-transp-header .header-sidebar-wrap .hamburger-menu .hamburger-icon, 
+        body.mb-transp-header .header-sidebar-wrap .hamburger-menu .hamburger-icon:before, 
+        body.mb-transp-header .header-sidebar-wrap .hamburger-menu .hamburger-icon:after{
+            box-shadow: 0px 1px 5px #01010126
+        }
+        body.mb-transp-header .header-sidebar-wrap .hamburger-menu:hover .hamburger-icon, 
+        body.mb-transp-header .header-sidebar-wrap .hamburger-menu:hover .hamburger-icon:before, 
+        body.mb-transp-header .header-sidebar-wrap .hamburger-menu:hover .hamburger-icon:after{
+            box-shadow: 0px 1px 5px #0101017d;
+        }
+        body.mb-transp-header header .widget_nav_menu ul.menu > li a{
+            text-shadow: 1px 2px 4px #03030342;
+        }
+        
+        body.mb-transp-header .post-content > h1:first-child{
+	        padding-top:calc(var(--abstandUntenHeadline) + var(--headerHeight))
+        }
+        /*Mobile*/
+        body.mb-transp-header.noscroll header{
+            backdrop-filter:none;
+            transition: none;
+            }
+            body.mb-transp-header.noscroll header .mb-header-menu-wrap.menu-open{
+                backdrop-filter:blur(3px)
+            }
+
+/*
+    Loop/Kachel
+*/
+:root{
+    --colorLoopTitle:var(--loopcolor);
+}
+.loop article{
+	
+}
+.loop article:hover{
+    box-shadow: 0px 0px 3px #52525229;
+    }
+    
+    main .loop-wrapper .thumb-wrap{
+		margin-bottom:0;
+		}
+		main .loop-wrapper .thumb-wrap .thumbnail{
+			transition: all 0.3s ease
+		}
+    
+    .loop-wrapper .loop-title{
+        justify-content: flex-start;
+        background-color:transparent;   
+        padding-bottom: 0;
+    }
+    
+    body.typ-faq .loop article .loop-wrapper > div, 
+    .loop-wrapper .loop-excerpt{
+        text-align: left;
+    }
+    
+    
+    .loop-wrapper .loop-more,
+	.loop article.mb-show-posttype .loop-type,
+	body.typ-faq .loop article .loop-wrapper > div,
+	.loop-wrapper .loop-excerpt{
+		color:var(--colorLoopTitle);
+	}
+	
+			
+	.loop article .loop-type{
+		margin-bottom:20px;
+	}
+	.loop-wrapper .loop-more{
+        padding-right: var(--abstandSeitenLoop);
+        justify-content: right;
+        margin-bottom:var(--abstandSeitenLoop);
+    }
+
+/*Single*/
+.single .publish-date{
+	max-width: var(--wp--style--global--content-size);
+    margin-left: auto;
+    margin-right: auto;
+}
+	
+/*Options*/
+.single.mb-hide-category .post-info .categories,
+.loop article .loop-type,
+.single.mb-hide-lopp-date article .publish-date,
+.loop article.mb-hide-lopp-date .loop-date{
+    display:none
+}
+.loop article.mb-show-posttype .loop-type{
+    display:block
+}
+
+/*Hero*/
+.mb-transp-header .mbfse-hero{
+	height: 100vh;
+}
+
+/*
+    Defaults
+*/
+/* Akkordeon */
+.mbgi-block-akkordeon{
+	margin-bottom: calc(var(--abstandUntenTxtElement) /2 );
+}
+.mbgi-block-akkordeon.distanceBottom{
+	margin-bottom: var(--abstandUntenTxtElement);
+}
+
+/*Teaserbox*/
+.mbgi-block-teaserbox{
+	--TeaserboxBG:var(--sekundaerfarbe);
+    --TeaserboxColor:var(--menufarbe);
+    }
+    
+    .mbgi-block-teaserbox .teaserbox-text:before{
+        width: 192px;
+        height: 192px;        
+        right: -4%;
+        top: auto;
+        bottom: -4%;
+    }
+    .mb-teaserbox-no-image.mbgi-block-teaserbox .teaserbox-text:before{
+        right: 0%;
+        top: 50%;
+    }
+
+/*Swiper*/
+.swiper {
+    --swiper-navigation-color:var(--hauptfarbe);
+    --swiper-pagination-color:var(--hauptfarbe);
+}
+
+
+/*Termine*/
+.mbgi-termin-top{
+    display:none;
+}
+.mbgi-block-termine-wrap > a{
+    background-color: transparent;
+    border:2px solid var(--colorFont);
+    }
+    main .post-content .mbgi-termin-content .mbgi-termin-titel{
+        margin-bottom:var(--abstandUntenParagraph)
+    }
+    .mbgi-termin-content .mbgi-termin-datum{
+        font-weight: 100;
+    }
+
+/*
+    Footer
+*/
+footer .widget_nav_menu{
+    display: flex;
+    justify-content: space-around;
+    gap: 80px;
+    }
+    footer .widget_nav_menu.singlemenu .menu{
+        display: flex;
+        }
+        footer .menu li a,
+        footer .menu li{
+            padding: 10px;
+            }
+            footer a:hover{
+                color:var(--colorMenuItem);
+                background: var(--sekundaerfarbe);
+            }
+
+footer #corporate-copyright{
+    display: flex;
+    justify-content: center;
+    color:var(--colorMenuItem)
+}
+
+.footer-sidebar-backend *{
+	color:var(--colorMenuItem);
+}
+
+/*
+	Mobile
+*/
+@media (max-width:1200px) {
+	:root{
+		--headerHeight:60px;
+	}
+    .header-wrap .social-media a:before{
+        margin-right: 0;
+    }
+	.wp-block-columns{
+		flex-wrap: wrap!important;
+		}
+		.wp-block-column{
+	    	min-width: 260px;
+			}
+}

@@ -1,0 +1,16 @@
+/* raleway-regular - latin */
+@font-face {
+     font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+     font-family: 'NotoSans';
+     font-style: normal;
+     font-weight: 400;
+     src: url('../fonts/NotoSans/NotoSans-Regular.ttf'); /* IE9 Compat Modes */
+   }
+   /* raleway-700 - latin */
+   @font-face {
+     font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+     font-family: 'NotoSans';
+     font-style: normal;
+     font-weight: 700;
+     src: url('../fonts/NotoSans/NotoSans-Bold.ttf'); /* IE9 Compat Modes */
+   }

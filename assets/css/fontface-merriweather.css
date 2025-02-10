@@ -1,0 +1,17 @@
+/* raleway-regular - latin */
+@font-face {
+     font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+     font-family: 'Merriweather';
+     font-style: normal;
+     font-weight: 400;
+     src: url('../fonts/Merriweather/Merriweather-Regular.ttf'); /* IE9 Compat Modes */
+     font-size: 210%;
+   }
+   /* raleway-700 - latin */
+   @font-face {
+     font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+     font-family: 'Merriweather';
+     font-style: normal;
+     font-weight: 700;
+     src: url('../fonts/Merriweather/Merriweather-Bold.ttf'); /* IE9 Compat Modes */
+   }
