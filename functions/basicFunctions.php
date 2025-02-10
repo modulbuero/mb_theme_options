@@ -453,3 +453,47 @@ function mb_rename_ninja_forms_menu() {
     }
 }
 add_action('admin_menu', 'mb_rename_ninja_forms_menu', 999);
+
+/*Redirection und Wartungsmodus nach Einstellungen verschieben*/
+function customize_admin_menu() {
+	if(is_plugin_active('redirection/redirection.php')){	
+	    $menu_slug = 'redirection.php'; // Der originale Menü-Slug
+	    $menu_title = 'Weiterleitungen'; 
+	    $capability = 'manage_options';
+	
+	    add_submenu_page(
+	        'options-general.php', // Zielmenü (Einstellungen)
+	        $menu_title, 
+	        $menu_title, 
+	        $capability, 
+	        'redirect-to-redirection', // Neuer Slug für das Menü
+			'redirect_to_redirection_page'
+	    );
+    }
+    
+    	
+    $menu_slug_w = 'mb_wartungsmodus_options'; // Der originale Menü-Slug
+    $menu_title_w = 'Wartungsmodus'; 
+    $capability_w = 'manage_options';
+
+    add_submenu_page(
+        'options-general.php', // Zielmenü (Einstellungen)
+        $menu_slug_w, 
+        $menu_title_w, 
+        $capability_w, 
+        'redirect-to-wartungsmodus', // Neuer Slug für das Menü
+		'redirect_to_wartungsmodus_page'
+    );
+
+}
+function redirect_to_redirection_page() {
+	echo "<h2>Weiterleitung</h2>";
+    echo '<meta http-equiv="refresh" content="0;url='.admin_url('tools.php?page=redirection.php').'">';
+    exit;
+}
+
+function redirect_to_wartungsmodus_page() {
+	echo "<h2>Wartungsmodus</h2>";
+    echo '<meta http-equiv="refresh" content="0;url='.admin_url('tools.php?page=mb_wartungsmodus_options').'">';
+}
+add_action('admin_menu', 'customize_admin_menu', 999);
