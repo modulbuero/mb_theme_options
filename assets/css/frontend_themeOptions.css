@@ -318,6 +318,6 @@ footer #corporate-copyright{
 		flex-wrap: wrap!important;
 		}
 		.wp-block-column{
-	    	min-width: 260px;
+	    	/* min-width: 260px; */
 			}
 }

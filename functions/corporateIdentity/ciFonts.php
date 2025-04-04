@@ -169,6 +169,7 @@ function get_ci_fonts($fontname, $typ='ueberschrift'){
 	$select .= '<p class="Quicksand">Quicksand</p>';
 	$select .= '<p class="NotoSans">NotoSans</p>';
 	$select .= '<p class="Garamond">Garamond</p>';
+	$select .= '<p class="Karantina">Karantina</p>';
 	$select .= '<p class="Quicksand">Quicksand</p>';
 	$select .= '<p class="Merriweather">Merriweather</p>';
 	$select .= '<p class="DancingScript">DancingScript</p><em>(Handwrite)</em>';

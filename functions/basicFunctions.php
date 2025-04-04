@@ -40,6 +40,7 @@ function mbt_enqueue_theme_options() {
         wp_enqueue_style( 'themeOptions-quicksand', $assetPath. 'fontface-quicksand.css' , array(), '1.0' );
         wp_enqueue_style( 'themeOptions-notosans', $assetPath. 'fontface-notosans.css' , array(), '1.0' );
 		wp_enqueue_style( 'themeOptions-garamond', $assetPath. 'fontface-garamond.css' , array(), '1.0' );
+        wp_enqueue_style( 'themeOptions-karantina', $assetPath. 'fontface-karantina.css' , array(), '1.0' );
 		wp_enqueue_style( 'themeOptions-merriweather', $assetPath. 'fontface-merriweather.css' , array(), '1.0' );
 		wp_enqueue_style( 'themeOptions-dancingscript', $assetPath. 'fontface-dancingscript.css' , array(), '1.0' );
 		wp_enqueue_style( 'themeOptions-qwitchergrypen', $assetPath. 'fontface-qwitchergrypen.css' , array(), '1.0' );
@@ -88,6 +89,10 @@ function themeFont(){
     //Get Garamond Font
     if($fontUberschrift == 'Garamond' || $fontStandard == 'Garamond' || $fontMenu == 'Garamond'){
         wp_enqueue_style( 'themeOptions-garamond', $assetPath . 'fontface-garamond.css', array(), '1.0' );
+    }
+    //Get Garamond Font
+    if($fontUberschrift == 'Karantina' || $fontStandard == 'Karantina' || $fontMenu == 'Karantina'){
+        wp_enqueue_style( 'themeOptions-karantina', $assetPath . 'fontface-karantina.css', array(), '1.0' );
     }
 	//Get Merriweather Font
     if($fontUberschrift == 'Merriweather' || $fontStandard == 'Merriweather' || $fontMenu == 'Merriweather'){
@@ -497,3 +502,12 @@ function redirect_to_wartungsmodus_page() {
     echo '<meta http-equiv="refresh" content="0;url='.admin_url('tools.php?page=mb_wartungsmodus_options').'">';
 }
 add_action('admin_menu', 'customize_admin_menu', 999);
+
+function custom_gutenberg_color_palette() {
+    add_theme_support('editor-color-palette', [
+        ['name' => 'Hauptfarbe', 'slug' => 'primary', 'color' => get_option('mb_theme_ci_farbe_hauptfarbe')],
+        ['name' => 'Sekundärfarbe', 'slug' => 'secondary', 'color' => get_option('mb_theme_ci_farbe_sekundaerfarbe')],
+        ['name' => 'Verlinkung', 'slug' => 'tertiary', 'color' => get_option('mb_theme_ci_farbe_linkfarbe')],
+    ]);
+}
+add_action('after_setup_theme', 'custom_gutenberg_color_palette');

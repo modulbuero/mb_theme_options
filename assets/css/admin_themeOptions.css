@@ -111,6 +111,10 @@ body{
         .ci-fonts-selects p.Garamond{
             font-family: "Garamond";
         }
+        .ci-fonts-selector-wrap input[value=Karantina],
+        .ci-fonts-selects p.Karantina{
+            font-family: "Karantina";
+        }
         .ci-fonts-selector-wrap input[value=Merriweather],
         .ci-fonts-selects p.Merriweather{
             font-family: "Merriweather";

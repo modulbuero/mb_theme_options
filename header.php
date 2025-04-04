@@ -41,13 +41,11 @@
 				    <div id="header-logo">
 				        <?php 
 				        if ( !empty( get_option( 'mb_theme_ci_mainLogo' ) ) ) {
-				            echo '<a href="'.get_site_url().'"><img src="'. get_option("mb_theme_ci_mainLogo") .'" alt="'.get_bloginfo().'" />';
-				            if ( !empty( get_option('mb_theme_layout_header_title') ) ) {
-				                echo '<span>'.get_bloginfo().'</span>';
-				            }    
-				            echo '</a>';
+				            echo '<a href="'.get_site_url().'"><img src="'. get_option("mb_theme_ci_mainLogo") .'" alt="'.get_bloginfo('name').'" /></a>';
 				        }
-				        
+						if ( !empty( get_option('mb_theme_layout_header_title') ) ) {
+							echo '<p class="no-distance-bottom"><a href="'.get_site_url().'">'.get_bloginfo('name').'</a></p>';
+						}
 				        ?>
 				    </div>
 				    <div class="widget_nav_menu mb-header-menu-wrap">

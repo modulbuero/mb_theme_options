@@ -1,0 +1,16 @@
+/* raleway-regular - latin */
+@font-face {
+     font-display: swap;
+     font-family: 'Karantina';
+     font-style: normal;
+     font-weight: 400;
+     src: url('../fonts/Karantina/Karantina-Regular.ttf');
+   }
+   /* raleway-700 - latin */
+   @font-face {
+     font-display: swap;
+     font-family: 'Karantina';
+     font-style: normal;
+     font-weight: 700;
+     src: url('../fonts/Karantina/Karantina-Bold.ttf');
+   }

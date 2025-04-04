@@ -191,7 +191,31 @@
 					"name": "Garamond",
 					"slug": "garamond"
 				},
-				
+				{
+					"fontFace": [
+						{
+							"fontFamily": "Karantina",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "400",
+							"src": [
+								"file:./fonts/Karantina/Karantina-Regular.ttf"
+							]
+						},
+						{
+							"fontFamily": "Karantina",
+							"fontStretch": "normal",
+							"fontStyle": "normal",
+							"fontWeight": "700",
+							"src": [
+								"file:./fonts/Karantina/Karantina-Bold.ttf"
+							]
+						}
+					],
+					"fontFamily": "\"Karantina\", sans-serif",
+					"name": "Karantina",
+					"slug": "karantina"
+				},
 				{
 					"fontFace": [
 						{
