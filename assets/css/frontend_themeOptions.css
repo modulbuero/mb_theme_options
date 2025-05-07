@@ -28,6 +28,9 @@ body{
     .header-sidebar-wrap .hamburger-menu{
         order: 1;
     }
+    header .widget_nav_menu ul li a i::before{
+        color: var(--colorMenuItem);
+    }
 
     /*SoMe*/
     header .header-container{

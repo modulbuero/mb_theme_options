@@ -73,3 +73,5 @@ require_once ( $path . 'themeOptions_layout.php');
 if ( is_antwortzeit_admin_user () ) {
     require_once ( $path . 'themeOptions_exportimport.php');
 }
+
+require_once ( $path . 'corporateIdentity/searchmenubutton.php');
