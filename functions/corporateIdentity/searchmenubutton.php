@@ -17,7 +17,7 @@ class SearchMenuOption {
     
     public function __construct() {
         // Admin-Menü hinzufügen
-        add_action('admin_menu', array($this, 'add_tools_page'));
+        add_action('admin_menu', array($this, 'add_themes_page'));
         
         // Hook für die Hauptmenü-Manipulation
         add_filter('wp_nav_menu_items', array($this, 'add_search_to_menu'), 10, 2);
@@ -36,10 +36,10 @@ class SearchMenuOption {
     /**
      * Fügt eine neue Seite im Werkzeuge-Menü hinzu
      */
-    public function add_tools_page() {
-        add_management_page(
-            'Such-Menüpunkt',         // Seitentitel
-            'Such-Menüpunkt',         // Menütitel
+    public function add_themes_page() {
+        add_theme_page(
+            'Menüpunkt Lupe',         // Seitentitel
+            'Menüpunkt Lupe',         // Menütitel
             'manage_options',         // Erforderliche Berechtigung
             'search-menu-option',     // Menü-Slug
             array($this, 'render_tools_page') // Callback-Funktion
@@ -62,9 +62,9 @@ class SearchMenuOption {
             
             echo '<div class="notice notice-success is-dismissible"><p>';
             if ($active === '1') {
-                echo 'Such-Menüpunkt wurde aktiviert.';
+                echo 'Menüpunkt Lupe wurde aktiviert.';
             } else {
-                echo 'Such-Menüpunkt wurde deaktiviert.';
+                echo 'Menüpunkt Lupe wurde deaktiviert.';
             }
             echo '</p></div>';
         }
@@ -80,13 +80,12 @@ class SearchMenuOption {
                 <?php settings_fields('search_menu_options'); ?>
                 <table class="form-table">
                     <tr>
-                        <th scope="row">Status</th>
+                        <th scope="row">Aktivieren</th>
                         <td>
                             <label for="search_menu_active">
                                 <input type="checkbox" id="search_menu_active" name="search_menu_active" value="1" <?php checked('1', $active); ?>>
-                                Such-Menüpunkt zum Hauptmenü hinzufügen
+                                Menüpunkt Suche/"Lupe" zum Hauptmenü hinzufügen
                             </label>
-                            <p class="description">Wenn aktiviert, wird ein Such-Menüpunkt mit "?s=" Parameter zum Hauptmenü hinzugefügt.</p>
                         </td>
                     </tr>
                 </table>
