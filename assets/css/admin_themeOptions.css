@@ -264,7 +264,7 @@ input[type=color], input[type=date], input[type=datetime-local], input[type=date
 }
 
 /*Design / Widgets*/
-#widgets-editor .edit-widgets-main-block-list.block-editor-block-list__layout > div:not(:first-child){
+#widgets-editor .edit-widgets-main-block-list.block-editor-block-list__layout > div:last-child{
     display:none;
 }
 

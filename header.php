@@ -58,6 +58,11 @@
 				    </div>
 				    <div class="hamburger-menu"><span class="hamburger-icon"></span></div>
 				</div>
+				<?php if(is_active_sidebar('mbto-post-header')):?>
+					<div class="mbto-post-header">
+						<?php dynamic_sidebar( 'mbto-post-header' ); ?>
+					</div>
+				<?php endif; ?>
 			</div>
         </header>
 

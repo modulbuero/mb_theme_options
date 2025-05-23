@@ -150,7 +150,7 @@ function themeOptions_theme_support(){
 	}
 }
 add_action( 'admin_init', 'themeOptions_theme_support',0 );
-
+#remove_action( 'widgets_init', 'mb_setup_sidebar' );
 
 /** **************************************** *
 * 	aktivate Swiper, Bootstrap, Lightbox, Extend Blocks
@@ -511,3 +511,26 @@ function custom_gutenberg_color_palette() {
     ]);
 }
 add_action('after_setup_theme', 'custom_gutenberg_color_palette');
+
+/**
+ * Widget Siedebar Post Header
+ */
+function mbto_setup_sidebar() {
+	
+    register_sidebar( array(
+		'name'          => 'After Header',
+		'id'            => 'mbto-post-header',
+		'description'   => 'Hier können Sie dem Header (Menüzeile) weitere Inhalte hinzufügen.',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+	) );
+}
+add_action( 'widgets_init', 'mbto_setup_sidebar', 99);
+
+function debug_all_sidebars() {
+    global $wp_registered_sidebars;
+    echo '<pre id="loremledih">';
+    print_r(array_keys($wp_registered_sidebars));
+    echo '</pre>';
+}
+//add_action('wp_footer', 'debug_all_sidebars');
