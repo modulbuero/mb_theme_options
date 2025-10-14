@@ -1,7 +1,8 @@
+(($) => {
 /**
  * Upload Image in Theme Options
  */
-jQuery(document).ready(function ($) {
+$(document).ready(function () {
     var custom_uploader;
     $('.upload_image_button').click(function (e) {
         e.preventDefault();
@@ -286,9 +287,10 @@ function hideSomeFavicons(){
 }
 
 //INIT the Funky Functions
-jQuery(document).ready( ()=> {
+$(document).ready( ()=> {
     autoColor()
     changeFonts()
     similarColors()
     hideSomeFavicons()
 })
+})(jQuery)

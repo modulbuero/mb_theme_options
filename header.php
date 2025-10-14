@@ -31,12 +31,13 @@
 				$hamburgerOn        = (get_option('mb_hamburger_an') != 'on')? "hamburger-off":"hamburger-on";
 				$header_ausrichtung = get_option('mb_theme_layout_header_anordnung');
 				?>
-				
+				<?php if(get_option('mb_sozial_media_pre_header') == 'on') : ?>
 				<div class="header-container alignfull">
 				    <div class="header-wrap">
 				        <?php include 'template/header-social-media.php'; ?>
 				    </div>
 				</div>
+				<?php endif; ?>
 				<div class="header-sidebar-wrap <?php echo $hamburgerOn . " " . $header_ausrichtung ?>">
 				    <div id="header-logo">
 				        <?php 
