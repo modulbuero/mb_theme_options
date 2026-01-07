@@ -64,6 +64,7 @@ require_once ( $path . 'themeOptions_corporateIdentity.php');
 require_once ( $path . 'corporateIdentity/logoFavicon.php');
 require_once ( $path . 'corporateIdentity/ciColor.php');
 require_once ( $path . 'corporateIdentity/ciFonts.php');
+require_once ( $path . 'corporateIdentity/ciWerbeblocks.php');
 
 //Layout
 require_once ( $path . 'themeOptions_layout.php');

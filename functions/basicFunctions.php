@@ -32,6 +32,7 @@ function mbt_enqueue_theme_options() {
 
         //BackenCSS
         wp_enqueue_style( 'themeOptions', $assetPath. 'admin_themeOptions.css' , array(), '1.0' );
+        wp_enqueue_style( 'themeOptions-inter', $assetPath. 'fontface-inter.css' , array(), '1.0' );
         wp_enqueue_style( 'themeOptions-cabin', $assetPath. 'fontface-cabin.css' , array(), '1.0' );
         wp_enqueue_style( 'themeOptions-montserrat', $assetPath. 'fontface-montserrat.css' , array(), '1.0' );
         wp_enqueue_style( 'themeOptions-raleway', $assetPath. 'fontface-raleway.css' , array(), '1.0' );
@@ -58,6 +59,10 @@ function themeFont(){
     $fontMenu        = get_option('mb_theme_ci_fonts_menuefont');
     $assetPath 		 = get_stylesheet_directory_uri(). '/assets/css/';
     
+    //Get Inter Font
+    if($fontUberschrift == 'Inter' || $fontStandard == 'Inter' || $fontMenu == 'Inter'){
+        wp_enqueue_style( 'themeOptions-inter', $assetPath . 'fontface-inter.css', array(), '1.0' );
+    }
     //Get Cabin Font
     if($fontUberschrift == 'Cabin' || $fontStandard == 'Cabin' || $fontMenu == 'Cabin'){
         wp_enqueue_style( 'themeOptions-cabin', $assetPath . 'fontface-cabin.css', array(), '1.0' );
@@ -518,14 +523,29 @@ add_action('after_setup_theme', 'custom_gutenberg_color_palette');
 function mbto_setup_sidebar() {
 	
     register_sidebar( array(
-		'name'          => 'After Header',
+		'name'          => 'Unter den Header',
 		'id'            => 'mbto-post-header',
-		'description'   => 'Hier können Sie dem Header (Menüzeile) weitere Inhalte hinzufügen.',
+		'description'   => 'Hier können Sie am Unteren Teil des Header (Menüzeile) weitere Inhalte hinzufügen.',
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</div>',
 	) );
 }
 add_action( 'widgets_init', 'mbto_setup_sidebar', 99);
+
+/**
+ * Widget Siedebar Post Header
+ */
+function mbto_setup_sidebar_pre_menu() {
+	
+    register_sidebar( array(
+		'name'          => 'vor das Menü',
+		'id'            => 'mbto-before-menu',
+		'description'   => 'Hier können Sie dem Header, vor das Menü, weiteren Inhalte hinzufügen.',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+	) );
+}
+add_action( 'widgets_init', 'mbto_setup_sidebar_pre_menu', 99);
 
 function debug_all_sidebars() {
     global $wp_registered_sidebars;

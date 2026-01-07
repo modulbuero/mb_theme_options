@@ -27,6 +27,8 @@ function themeOptions_ci_callback () {
             class="nav-tab <?php echo $active_tab == 'colors' ? 'nav-tab-active' : ''; ?>">Farben</a>
             <a href="?page=theme-options-ci&tab=fonts" 
             class="nav-tab <?php echo $active_tab == 'fonts' ? 'nav-tab-active' : ''; ?>">Typografie</a>
+            <a href="?page=theme-options-ci&tab=werbeblock" 
+            class="nav-tab <?php echo $active_tab == 'fonts' ? 'nav-tab-active' : ''; ?>">Werbeoptionen</a>
         </h2>
 
         <form method='post' action='options.php'>
@@ -41,6 +43,9 @@ function themeOptions_ci_callback () {
             } else if ( $active_tab == 'fonts' ) { 
                 settings_fields('mb_theme_ci_fonts_section_id');
                 do_settings_sections('theme-options_ci-fonts');      
+            } else if ( $active_tab == 'werbeblock' ) { 
+                settings_fields('mb_theme_ci_werbeblock_section_id');
+                do_settings_sections('theme-options_ci-werbeblock');      
             } 
             echo '<div id="zusatzanzeige"></div>';
             submit_button(); 
@@ -57,6 +62,7 @@ function display_theme_options_ci_fields() {
     themeOptions_ci_favicon ();
     themeOptions_ci_colors();
     themeOptions_ci_fonts();
+    themeOptions_ci_werbeblock();
 }
 add_action('admin_init', 'display_theme_options_ci_fields');
 

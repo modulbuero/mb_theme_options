@@ -49,6 +49,11 @@
 						}
 				        ?>
 				    </div>
+					<?php if(is_active_sidebar('mbto-before-menu')):?>
+						<div class="mbto-before-menu">
+							<?php dynamic_sidebar( 'mbto-before-menu' ); ?>
+						</div>
+					<?php endif; ?>
 				    <div class="widget_nav_menu mb-header-menu-wrap">
 				        <?php
 				        wp_nav_menu( array(
