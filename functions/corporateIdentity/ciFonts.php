@@ -161,6 +161,7 @@ function get_ci_fonts($fontname, $typ='ueberschrift'){
 	$select = '<div class="ci-fonts-selector-wrap">';
 	$select .= '<input readonly id="mb_theme_ci_fonts_'.$typ.'" name="mb_theme_ci_fonts_'.$typ.'" type="text" value="'.$fontname.'">';
 	$select .= '<div class="ci-fonts-selects">';
+	$select .= '<p class="Inter">Inter</p>';
 	$select .= '<p class="Montserrat">Montserrat</p>';
 	$select .= '<p class="Cabin">Cabin</p>';
 	$select .= '<p class="Roboto">Roboto</p>';

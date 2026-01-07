@@ -87,6 +87,10 @@ body{
         .ci-fonts-selects p.Cabin{
             font-family: "Cabin";
         }
+        .ci-fonts-selector-wrap input[value=Inter],
+        .ci-fonts-selects p.Inter{
+            font-family: "Inter";
+        }
         .ci-fonts-selector-wrap input[value=Roboto],
         .ci-fonts-selects p.Roboto{
             font-family: "Roboto";
