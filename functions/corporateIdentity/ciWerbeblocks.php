@@ -68,9 +68,9 @@ function mb_theme_ci_werbeblock_headerlogo(){
 */
 if(!empty(get_option('mb_theme_ci_werbeblock_headerlogo'))){
 
-	add_action('wp_footer', 'mb_plugin_theme_color');
-	add_action('admin_footer', 'mb_plugin_theme_color');
-	function mb_plugin_theme_color(){
+	add_action('wp_footer', 'mb_plugin_theme_color_wb');
+	add_action('admin_footer', 'mb_plugin_theme_color_wb');
+	function mb_plugin_theme_color_wb(){
 		$hauptfarbe 	= get_option('mb_theme_ci_werbeblock_hauptfarbe');
 		$sekundaerfarbe = get_option('mb_theme_ci_werbeblock_sekundaerfarbe');
 		$tertiaerfarbe 	= get_option('mb_theme_ci_werbeblock_tertiaerfarbe');
