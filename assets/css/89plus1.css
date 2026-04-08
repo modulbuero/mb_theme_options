@@ -1,0 +1,44 @@
+.woocommerce {
+  --minute-border-color: var(--hauptfarbe);
+  --minute-selected-bgcolor: var(--hauptfarbe);
+}
+.woocommerce .woocommerce-breadcrumb {
+  display: none;
+}
+.woocommerce .woocommerce-product-gallery.images {
+  margin-top: 12px;
+}
+.woocommerce .summary {
+  /*Minutenanzeige*/
+}
+.woocommerce .summary .minute-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.woocommerce .summary .minute-grid .minute-button {
+  padding: 5px 10px;
+  cursor: pointer;
+  min-width: 40px;
+  background: transparent;
+  border: 1px solid var(--minute-border-color);
+  border-radius: 5px;
+}
+.woocommerce .summary .minute-grid .minute-button.selected {
+  background: var(--minute-selected-bgcolor);
+  color: var(--colorMenuItem);
+}
+.woocommerce .summary .minute-grid .minute-button[disabled] {
+  background: #ccc;
+  border-color: #ccc;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+.woocommerce .summary .minute-grid .minute-button:hover:not([disabled]) {
+  background: var(--linkfarbe);
+  color: var(--colorMenuItem);
+}
+.woocommerce .summary .product_meta {
+  display: none;
+}/*# sourceMappingURL=89plus1.css.map */

@@ -76,3 +76,13 @@ if ( is_antwortzeit_admin_user () ) {
 }
 
 require_once ( $path . 'corporateIdentity/searchmenubutton.php');
+
+//Woocommerce Addon
+if (is_plugin_active( 'woocommerce/woocommerce.php' )) {
+    
+    add_action( 'after_setup_theme', function() {
+        add_theme_support( 'woocommerce' );
+    });
+    remove_action('woocommerce_sidebar', 'woocommerce_get_sidebar', 10);
+    require_once ( $path . 'themeOptions_89plus1.php');
+}
