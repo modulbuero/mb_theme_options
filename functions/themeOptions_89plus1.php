@@ -1,242 +1,285 @@
 <?php
 if (is_plugin_active( 'woocommerce/woocommerce.php' )) {
-	
-// 1. Minuten als Buttons auf Produktseite anzeigen
-add_action('woocommerce_before_add_to_cart_button', function() {
-    global $product;
 
-    // ID des speziellen Produkts anpassen
-    if ($product->get_name() !== '89plus1') return;
+    /**
+     * Hilfsfunktion: Ermittelt alle belegten Spielminuten (Bestellungen + Warenkorb)
+     * Berücksichtigt 'processing' und 'completed' Status sowie den aktuellen Warenkorb.
+     */
+    function mbt_get_89plus1_taken_minutes($product_id) {
+        $taken = [];
 
-    // Alle Minuten definieren
-    $minutes = range(1, 90);
+        // Sicherstellen, dass wir mit der Haupt-Produkt-ID arbeiten (Parent ID)
+        $product = wc_get_product($product_id);
+        if (!$product) return [];
+        $main_product_id = $product->get_parent_id() ? $product->get_parent_id() : $product->get_id();
 
-    // Bereits verkaufte Minuten sammeln
-    $sold_minutes = [];
-    $orders = wc_get_orders([
-        'limit' => -1,
-        'status' => 'completed',
-    ]);
-    foreach ($orders as $order) {
-        foreach ($order->get_items() as $item) {
-            if ($item->get_product_id() == $product->get_id()) {
-                $meta = $item->get_meta('_selected_minute');
-                if ($meta) $sold_minutes[] = $meta;
+        // 1. Minuten aus gekauften Bestellungen sammeln (alle Statusse außer cancelled/refunded)
+        $orders = wc_get_orders([
+            'limit'  => -1,
+            'status' => ['pending', 'processing', 'on-hold', 'completed'],
+        ]);
+
+        foreach ($orders as $order) {
+            foreach ($order->get_items() as $item) {
+                // Wir prüfen auf die Produkt-ID (unabhängig von der Variation)
+                if ($item->get_product_id() == $main_product_id) {
+                    $meta = $item->get_meta('_selected_minute');
+                    if ($meta) {
+                        $taken[] = (int)$meta;
+                    }
+                }
             }
         }
+
+        // 2. Minuten aus dem aktuellen Warenkorb berücksichtigen
+        if (WC()->cart) {
+            foreach (WC()->cart->get_cart() as $cart_item) {
+                if ($cart_item['product_id'] == $main_product_id) {
+                    $minute = !empty($cart_item['selected_minute']) ? $cart_item['selected_minute'] : (!empty($cart_item['_selected_minute']) ? $cart_item['_selected_minute'] : null);
+                    if (!empty($minute)) {
+                        $taken[] = (int)$minute;
+                    }
+                }
+            }
+        }
+
+        return array_values(array_unique($taken));
     }
 
-    echo '<p>Spielminute</p>';
-    echo '<div class="minute-grid">';
-    foreach ($minutes as $minute) {
-        $disabled = in_array($minute, $sold_minutes) ? 'disabled' : '';
-        echo '<button type="button" class="minute-button" data-minute="'.$minute.'" '.$disabled.'>'.$minute.'</button> ';
-    }
-    echo '<input type="hidden" name="selected_minute" id="selected_minute">';
-    echo '</div>';
+    // 1. Minuten als Buttons auf Produktseite anzeigen
+    add_action('woocommerce_before_add_to_cart_form', function() {
+        global $product;
 
-    // JS für Auswahl
-    ?>
-    <script>
-    const buttons = document.querySelectorAll('.minute-button');
-    const input = document.getElementById('selected_minute');
-    buttons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            if(this.disabled) return;
-            buttons.forEach(b => b.classList.remove('selected'));
-            this.classList.add('selected');
-            input.value = this.dataset.minute;
+        // ID des speziellen Produkts anpassen
+        if ($product->get_slug() !== '89plus1') return;
+
+        // Alle Minuten definieren
+        $minutes = range(1, 90);
+        $sold_minutes = mbt_get_89plus1_taken_minutes($product->get_id());
+
+        echo '<p>Spielminute</p>';
+        echo '<div class="minute-grid">';
+        foreach ($minutes as $minute) {
+            $disabled = in_array($minute, $sold_minutes) ? 'disabled' : '';
+            echo '<button type="button" class="minute-button" data-minute="'.$minute.'" '.$disabled.'>'.$minute.'</button> ';
+        }
+        echo '</div>';
+    }, 9);
+
+    add_action('woocommerce_after_add_to_cart_quantity', function() {
+        global $product;
+        
+        if ($product->get_slug() !== '89plus1') return;
+        
+        echo '<input type="hidden" name="selected_minute" id="selected_minute">';
+        
+        ?>
+        <script>
+        const buttons = document.querySelectorAll('.minute-button');
+        const input = document.getElementById('selected_minute');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                if(this.disabled) return;
+                buttons.forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+                input.value = this.dataset.minute;
+            });
         });
+        </script>
+        <?php
+    }, 11);
+
+    // 2. Minute prüfen beim Warenkorb hinzufügen
+    add_filter('woocommerce_add_to_cart_validation', function($passed, $product_id, $quantity) {
+        $product = wc_get_product($product_id);
+        if (!$product) return $passed;
+
+        // Slug vom Hauptprodukt prüfen (falls $product_id eine Variation ist)
+        $main_product = $product->get_parent_id() ? wc_get_product($product->get_parent_id()) : $product;
+        
+        if ($main_product->get_slug() !== '89plus1') {
+            return $passed;
+        }
+
+        if (empty($_POST['selected_minute'])) {
+            wc_add_notice('Bitte wähle eine Minute aus.', 'error');
+            return false;
+        }
+
+        // Prüfen, ob Minute schon verkauft oder im Warenkorb
+        $minute = (int)sanitize_text_field($_POST['selected_minute']);
+        $taken_minutes = mbt_get_89plus1_taken_minutes($product_id);
+
+        if (in_array($minute, $taken_minutes)) {
+            wc_add_notice('Diese Minute wurde bereits gewählt oder befindet sich bereits im Warenkorb.', 'error');
+            return false;
+        }
+
+        return $passed;
+    }, 10, 3);
+
+    // 3. Minute in Warenkorb speichern
+    add_filter('woocommerce_add_cart_item_data', function($cart_item_data, $product_id, $variation_id) {
+        $product = wc_get_product($product_id);
+        // Falls es eine Variation ist, prüfe auch den Slug des Hauptprodukts
+        if ($variation_id) {
+            $parent = wc_get_product($variation_id);
+            if ($parent && $parent->get_type() === 'variation') {
+                $product = $parent;
+            }
+        }
+        
+        if (!$product) return $cart_item_data;
+        
+        // Prüfe Slug vom Hauptprodukt
+        $main_product = $product->get_parent_id() ? wc_get_product($product->get_parent_id()) : $product;
+        if (!$main_product || $main_product->get_slug() !== '89plus1') {
+            return $cart_item_data;
+        }
+
+        if (!empty($_POST['selected_minute'])) {
+            $minute = sanitize_text_field($_POST['selected_minute']);
+            $cart_item_data['selected_minute'] = $minute;
+            // Auch für persistente Speicherung
+            $cart_item_data['_selected_minute'] = $minute;
+        }
+
+        return $cart_item_data;
+    }, 10, 3);
+
+    // 4. Minute in Bestellposition speichern
+    add_action('woocommerce_checkout_create_order_line_item', function($item, $cart_item_key, $values, $order) {
+        $minute = !empty($values['selected_minute']) ? $values['selected_minute'] : (!empty($values['_selected_minute']) ? $values['_selected_minute'] : null);
+        
+        if (!empty($minute)) {
+            $item->add_meta_data('_selected_minute', $minute, true);
+            $item->add_meta_data('Spielminute', $minute . ' min', true);
+        }
+    }, 10, 4);
+
+    // 5. Minute im Warenkorb & Checkout anzeigen
+    add_filter('woocommerce_get_item_data', function($item_data, $cart_item) {
+        $product = wc_get_product($cart_item['product_id']);
+        if (!$product || $product->get_slug() !== '89plus1') {
+            return $item_data;
+        }
+        
+        // Prüfe beide Varianten der Speicherung
+        $minute = !empty($cart_item['selected_minute']) ? $cart_item['selected_minute'] : (!empty($cart_item['_selected_minute']) ? $cart_item['_selected_minute'] : null);
+        
+        if (!empty($minute)) {
+            $item_data[] = [
+                'name'  => 'Spielminute',
+                'value' => esc_html($minute),
+            ];
+        }
+        return $item_data;
+    }, 10, 2);
+
+    // 6. Display-Namen für Minuten-Meta
+    add_filter('woocommerce_order_item_display_meta_key', function($display_key, $meta) {
+        if ($meta->key === 'Minute') {
+            return 'Spielminute';
+        }
+        return $display_key;
+    }, 10, 2);
+
+    // 7. Prüfen ob Minute bereits im Warenkorb ist -> macht Nummer 8
+        // add_filter('woocommerce_add_to_cart_validation', function($passed, $product_id, $quantity) {
+
+        //     if (empty($_POST['selected_minute'])) return $passed;
+        //     $minute = sanitize_text_field($_POST['selected_minute']);
+
+        //     foreach (WC()->cart->get_cart() as $cart_item) {
+        //         if (!empty($cart_item['_selected_minute']) && $cart_item['_selected_minute'] == $minute) {
+        //             wc_add_notice('Diese Minute liegt bereits im Warenkorb.', 'error');
+        //             return false;
+        //         }
+        //     }
+
+        //     return $passed;
+        // }, 20, 3);
+
+    // 8. AJAX: belegte Minuten abrufen (GLOBAL - alle Variationen)
+    add_action('wp_ajax_get_taken_minutes', 'get_taken_minutes');
+    add_action('wp_ajax_nopriv_get_taken_minutes', 'get_taken_minutes');
+
+    function get_taken_minutes() {
+        if (empty($_POST['product_id'])) {
+            wp_send_json_error();
+        }
+
+        $product_id = intval($_POST['product_id']);
+        $taken = mbt_get_89plus1_taken_minutes($product_id);
+
+        wp_send_json_success($taken);
+    }
+
+    add_action('wp_enqueue_scripts', function() {
+
+        if (!is_product()) return;
+
+        global $product;
+        if (!$product || $product->get_slug() !== '89plus1') return;
+
+        wp_enqueue_script(
+            'minute-picker',
+            get_stylesheet_directory_uri() . '/assets/js/themeOptionsWoo.js',
+            [],
+            '1.0',
+            true
+        );
+
+        wp_localize_script('minute-picker', 'minute_ajax', [
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'product_id' => $product->get_id()
+        ]);
     });
-    </script>
-    <?php
-});
 
-// 2. Minute prüfen beim Warenkorb hinzufügen
-add_filter('woocommerce_add_to_cart_validation', function($passed, $product_id, $quantity) {
-    $product = wc_get_product($product_id);
-    if ($product->get_name() !== '89plus1') return $passed;
+    // 9. Custom CSS für Produktseite
+    add_action('wp_enqueue_scripts', 'load_custom_css_for_specific_product');
+    function load_custom_css_for_specific_product() {
+        if (is_product()) {
+            global $post;
 
-    if (empty($_POST['selected_minute'])) {
-        wc_add_notice('Bitte wähle eine Minute aus.', 'error');
-        return false;
-    }
-
-    // Prüfen, ob Minute schon verkauft
-    $minute = sanitize_text_field($_POST['selected_minute']);
-    $orders = wc_get_orders(['limit' => -1, 'status' => 'completed']);
-    foreach ($orders as $order) {
-        foreach ($order->get_items() as $item) {
-            if ($item->get_product_id() == $product_id && $item->get_meta('_selected_minute') == $minute) {
-                wc_add_notice('Diese Minute wurde bereits gewählt.', 'error');
-                return false;
+            // Produktname prüfen
+            if (get_the_title($post->ID) === '89plus1') {
+                wp_enqueue_style(
+                    'custom-product-css',
+                    get_stylesheet_directory_uri() . '/assets/css/89plus1.css',
+                    array(),
+                    '1.0'
+                );
             }
         }
+
+        wp_enqueue_style(
+            'mb-woo-css',
+            get_stylesheet_directory_uri() . '/assets/css/wooshop.css',
+            array(),
+            '1.0'
+        );
     }
 
-    return $passed;
-}, 10, 3);
-
-// 3. Minute in Warenkorb speichern
-add_filter('woocommerce_add_cart_item_data', function($cart_item_data, $product_id, $variation_id) {
-    $id = $variation_id ? $variation_id : $product_id;
-    $product = wc_get_product($id);
-    if ($product->get_name() !== '89plus1') return $cart_item_data;
-
-    if (!empty($_POST['selected_minute'])) {
-        $cart_item_data['_selected_minute'] = sanitize_text_field($_POST['selected_minute']);
-    }
-
-    return $cart_item_data;
-}, 10, 3);
-
-// 4. Minute in Bestellposition speichern
-add_action('woocommerce_checkout_create_order_line_item', function($item, $cart_item_key, $values, $order) {
-    if (!empty($values['_selected_minute'])) {
-        $item->add_meta_data('_selected_minute', $values['_selected_minute'], true);
-    }
-}, 10, 4);
-
-// 5. Minute im Warenkorb & Checkout anzeigen
-add_filter('woocommerce_get_item_data', function($item_data, $cart_item) {
-    if (!empty($cart_item['_selected_minute'])) {
-        $item_data[] = [
-            'name'  => 'Minute',
-            'value' => esc_html($cart_item['_selected_minute']),
-        ];
-    }
-    return $item_data;
-}, 10, 2);
-
-// 6. Schöner Anzeigename im Admin
-add_action('woocommerce_checkout_create_order_line_item', function($item, $cart_item_key, $values, $order) {
-    if (!empty($values['_selected_minute'])) {
-        $item->add_meta_data('Minute', $values['_selected_minute'] . ' min', true);
-    }
-}, 10, 4);
-
-// 7. Prüfen ob Minute bereits im Warenkorb ist -> macht Nummer 8
-    // add_filter('woocommerce_add_to_cart_validation', function($passed, $product_id, $quantity) {
-
-    //     if (empty($_POST['selected_minute'])) return $passed;
-    //     $minute = sanitize_text_field($_POST['selected_minute']);
-
-    //     foreach (WC()->cart->get_cart() as $cart_item) {
-    //         if (!empty($cart_item['_selected_minute']) && $cart_item['_selected_minute'] == $minute) {
-    //             wc_add_notice('Diese Minute liegt bereits im Warenkorb.', 'error');
-    //             return false;
-    //         }
-    //     }
-
-    //     return $passed;
-    // }, 20, 3);
-
-// 8. AJAX: belegte Minuten abrufen
-add_action('wp_ajax_get_taken_minutes', 'get_taken_minutes');
-add_action('wp_ajax_nopriv_get_taken_minutes', 'get_taken_minutes');
-
-function get_taken_minutes() {
-    if (empty($_POST['product_id'])) {
-        wp_send_json_error();
-    }
-
-    $product_id = intval($_POST['product_id']);
-    $taken = [];
-
-    // 1. Minuten aus abgeschlossenen Bestellungen
-    $orders = wc_get_orders([
-        'limit' => -1,
-        'status' => ['processing', 'completed'], // optional erweitert
-    ]);
-
-    foreach ($orders as $order) {
-        foreach ($order->get_items() as $item) {
-            if ($item->get_product_id() == $product_id) {
-                $m = $item->get_meta('_selected_minute');
-                if ($m) $taken[] = (int)$m;
-            }
+    // 10. Menge auf 1 begrenzen
+    add_filter('woocommerce_is_sold_individually', 'disable_quantity_for_specific_product', 10, 2);
+    function disable_quantity_for_specific_product($return, $product) {
+        if ($product && $product->get_slug() === '89plus1') {
+            return true; // Nur 1 Stück erlaubt → kein Quantity-Feld
         }
+
+        return $return;
     }
 
-    // 2. Minuten aus aktuellen Warenkörben (Session-basiert)
-    foreach (WC()->cart->get_cart() as $cart_item) {
-        if (
-            $cart_item['product_id'] == $product_id &&
-            !empty($cart_item['_selected_minute'])
-        ) {
-            $taken[] = (int)$cart_item['_selected_minute'];
-        }
+    //Entwicklung: Warenkorb
+    add_action('woocommerce_single_product_summary', 'custom_add_to_cart_button_bottom', 35);
+    function custom_add_to_cart_button_bottom() {
+        global $product;
+
+        if ($product->get_slug() !== '89plus1') return;
+
+        echo '<a href="' . wc_get_cart_url() . '" class="wp-element-button wc-forward" style="margin-top:20px; display:inline-block;">Zum Warenkorb</a>';
+
     }
-
-    wp_send_json_success(array_unique($taken));
-}
-
-add_action('wp_enqueue_scripts', function() {
-
-    if (!is_product()) return;
-
-    global $product;
-    if (!$product || $product->get_name() !== '89plus1') return;
-
-    wp_enqueue_script(
-        'minute-picker',
-        get_stylesheet_directory_uri() . '/assets/js/themeOptionsWoo.js',
-        [],
-        '1.0',
-        true
-    );
-
-    wp_localize_script('minute-picker', 'minute_ajax', [
-        'ajax_url' => admin_url('admin-ajax.php'),
-        'product_id' => $product->get_id()
-    ]);
-});
-
-// 9. Custom CSS für Produktseite
-add_action('wp_enqueue_scripts', 'load_custom_css_for_specific_product');
-function load_custom_css_for_specific_product() {
-    if (is_product()) {
-        global $post;
-
-        // Produktname prüfen
-        if (get_the_title($post->ID) === '89plus1') {
-            wp_enqueue_style(
-                'custom-product-css',
-                get_stylesheet_directory_uri() . '/assets/css/89plus1.css',
-                array(),
-                '1.0'
-            );
-        }
-    }
-
-    wp_enqueue_style(
-        'mb-woo-css',
-        get_stylesheet_directory_uri() . '/assets/css/wooshop.css',
-        array(),
-        '1.0'
-    );
-}
-
-// 10. Menge auf 1 begrenzen
-add_filter('woocommerce_is_sold_individually', 'disable_quantity_for_specific_product', 10, 2);
-function disable_quantity_for_specific_product($return, $product) {
-    if ($product && $product->get_name() === '89plus1') {
-        return true; // Nur 1 Stück erlaubt → kein Quantity-Feld
-    }
-
-    return $return;
-}
-
-//Entwicklung: Warenkorb
-add_action('woocommerce_single_product_summary', 'custom_add_to_cart_button_bottom', 35);
-
-function custom_add_to_cart_button_bottom() {
-    global $product;
-
-    if ($product->get_name() !== '89plus1') return;
-
-    echo '<a href="' . wc_get_cart_url() . '" class="wp-element-button wc-forward" style="margin-top:20px; display:inline-block;">Zum Warenkorb</a>';
-
-}
 
 }

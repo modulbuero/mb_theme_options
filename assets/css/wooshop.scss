@@ -6,6 +6,37 @@
     }
 }
 
+.single-product{
+
+    .variations{
+        --colorTableRow:transparent;
+        tr{
+            display:flex;
+            gap:5px;
+            .label{
+                margin-bottom: 0;
+                line-height: 1 !important;
+                display: flex;
+                align-items: center;
+
+            }
+            .value{
+                line-height: 1 !important;
+                padding: 15px 0 15px 15px;
+                margin-bottom: 0;
+                flex:1;
+                select{
+                    padding:5px;
+                }
+            }
+        }
+    }
+
+    .woocommerce-variation-price{
+        margin-bottom:10px;
+    }
+}
+
 .woocommerce-cart{
     --colorTableHead: #8b8b8b;
     --table-font-size: 14px;
@@ -68,4 +99,13 @@
         }
     }
     
+    .checkout-button.button.alt,
+    .wc-block-components-button{
+        background-color: var(--backgroundBody);
+        color:var(--colorFont);
+        border:1px solid var(--colorFont);
+        &:hover{
+            background-color: var(--sekundaerfarbe);
+        }
+    }   
 }

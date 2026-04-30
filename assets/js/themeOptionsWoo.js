@@ -49,6 +49,24 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Auf Varianten-Wechsel reagieren
+    document.addEventListener('change', function(e) {
+        // Reagiere auf Änderungen in Varianten-Select-Feldern
+        if (e.target.closest('.variations_form') && e.target.name.includes('attribute_')) {
+            // Kurze Verzögerung, um sicherzustellen, dass Daten aktualisiert sind
+            setTimeout(refreshMinutes, 100);
+        }
+    });
+
+    // Reagiere auch auf custom Events (manche Themes verwenden diese)
+    document.addEventListener('woocommerce_variation_select_change', function() {
+        setTimeout(refreshMinutes, 100);
+    });
+
     refreshMinutes();
     setInterval(refreshMinutes, 5000);
+
+
+    
 });
+

@@ -33,7 +33,7 @@
   background: #ccc;
   border-color: #ccc;
   cursor: not-allowed;
-  text-decoration: line-through;
+  opacity: 0.6;
 }
 .woocommerce .summary .minute-grid .minute-button:hover:not([disabled]) {
   background: var(--linkfarbe);
